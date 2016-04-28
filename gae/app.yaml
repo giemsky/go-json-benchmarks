@@ -1,0 +1,12 @@
+application: mychat-tracking-beta-1245
+runtime: go
+api_version: go1
+module: go-gae
+
+instance_class: B2
+manual_scaling:
+  instances: 1
+
+handlers:
+- url: /.*
+  script: _go_app
