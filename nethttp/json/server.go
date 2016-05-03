@@ -4,7 +4,7 @@ import (
   "fmt"
   "net/http"
   "log"
-  // "encoding/json"
+  "encoding/json"
 )
 
 type Record struct {
@@ -26,7 +26,7 @@ func healthHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func handler(w http.ResponseWriter, r *http.Request) {
-  // var records []Record
+  var records []Record
 
   if r.Method != "POST" {
     w.WriteHeader(http.StatusBadRequest)
@@ -40,13 +40,13 @@ func handler(w http.ResponseWriter, r *http.Request) {
     return
   }
 
-  // decoder := json.NewDecoder(r.Body)
-  // decoder.Decode(&records)
-  // for _, record := range records {
-  //   json.Marshal(record.Metadata)
-  //   // b, _  := json.Marshal(record.Metadata)
-  //   // log.Print(string(b))
-  // }
+  decoder := json.NewDecoder(r.Body)
+  decoder.Decode(&records)
+  for _, record := range records {
+    json.Marshal(record.Metadata)
+    // b, _  := json.Marshal(record.Metadata)
+    // log.Print(string(b))
+  }
 
   fmt.Fprint(w, "OK")
 }
